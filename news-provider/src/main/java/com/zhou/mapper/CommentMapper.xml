@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhou.mapper.CommentMapper">
+    <select id="queryByNewsId" parameterType="Integer" resultType="Comment">
+        select * from news_comment
+        where newsid=#{id}
+    </select>
+    <insert id="addComment" parameterType="Comment">
+        INSERT INTO news_comment
+        VALUES(NULL,#{newsid},#{content},#{author},NOW())
+    </insert>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhou.mapper.DetailMapper">
+
+    <select id="queryByTitle" parameterType="String" resultType="Detail">
+        select * from news_detail
+        <where>
+            <if test="title!=null and title!=''">
+                title like CONCAT('%',#{title},'%')
+            </if>
+        </where>
+        ORDER BY createdate desc
+    </select>
+
+    <delete id="deleteDetailAndComment" parameterType="Integer">
+        DELETE d,c FROM news_detail d
+        LEFT JOIN news_comment c
+        ON d.id = c.newsid
+        WHERE d.id=#{id}
+    </delete>
+
+</mapper>
